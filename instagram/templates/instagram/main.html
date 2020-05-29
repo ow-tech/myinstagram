@@ -2,9 +2,9 @@
 
 
 {% block content %}
-{% for post in Posts %}
+{% for post in posts %}
     <h1>{{ post.author}}</h1>
-    <p>{{post.image}}</p>
+    <img src= "{{ post.image.url}}" alt="image">
     <p>{{post.caption}}</p>
     <P>{{post.date |date:"F d, Y"}}</P>
 {% endfor %}

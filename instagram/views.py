@@ -7,6 +7,6 @@ from .models import Post
 
 def main(request):
     context = {
-        'Posts': Post
+        'posts': Post.objects.all()
     }
     return render(request, 'instagram/main.html', context)
