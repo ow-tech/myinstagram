@@ -138,3 +138,6 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
+
+# Account_Activation_DAYS
+Account_Activation_DAYS = 7 # 7 Days activation window
