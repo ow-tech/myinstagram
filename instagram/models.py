@@ -5,9 +5,12 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to="images/", null=False)
+    image = models.ImageField(upload_to="images/", null=True)
     caption = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return self.author, self.caption
+        return  '{} {}'.format(self.author, self.caption) 
+
+    def save_post(self):
+        self.save()
