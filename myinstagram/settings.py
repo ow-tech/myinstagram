@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'users',
+    'crispy_forms',
     'instagram',
     'bootstrap4',
     'django.contrib.admin',
@@ -140,5 +141,6 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
 
-# Account_Activation_DAYS
-Account_Activation_DAYS = 7 # 7 Days activation window
+
+#Defining which css framework to use
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
