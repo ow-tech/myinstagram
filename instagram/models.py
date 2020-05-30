@@ -14,3 +14,14 @@ class Post(models.Model):
 
     def save_post(self):
         self.save()
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    image = models.ImageField(default='default.jpg', upload_to='profile_images')
+    bio = models.TextField()
+
+    def save_profile(self):
+        self.save()
+
+    def __str__(self):
+        return '{} {}'.format(self.user, self.bio)
