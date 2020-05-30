@@ -1,7 +1,9 @@
-{%extends "users/base.html"%}
+{% extends "users/base.html" %}
 {% block content %}
 <div class="conatiner-fluid">
     <h1>{{ user.username }}</h1>
+    <img class="rounded-circle account-image"  src="{{user.profile.image.url }}">
+    <p>{{ user.profile.bio }}</p>
 
 </div>
 
