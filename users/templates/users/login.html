@@ -1,5 +1,6 @@
 {%extends "users/base.html"%}
 {% load bootstrap4 %}
+{% load crispy_forms_tags %}
 {% block content %}
 <div class="container">
   <div class="row">
@@ -16,10 +17,10 @@
         </div>
         <div class="panel-body">
 
-          <form  action="/accounts/login/" method="post">
+          <form  method="post">
             {% csrf_token %}
             <legend class="border-bottom mb-4">Log In</legend>
-            {%  form|crispy%}
+            {{ form|crispy }}
 
             <div class="form-group">
               <input type="submit" class="btn btn-primary btn-sm" value="Login">
