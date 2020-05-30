@@ -2,6 +2,7 @@
 
 
 {% block content %}
+<a href="{%url 'new-post'%}">Post</a>
 {% for post in posts %}
     <h1>{{ post.author}}</h1>
     <img src= "{{ post.image.url}}" alt="image">

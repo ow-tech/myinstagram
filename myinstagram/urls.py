@@ -24,7 +24,7 @@ urlpatterns = [
     path('', include('instagram.urls')),
     path('accounts/', include('registration.backends.simple.urls')),
     path('accounts/', include('django_registration.backends.activation.urls')),
-    path'ccounts/', include('registration.backends.hmac.urls')),
+    path('accounts/', include('registration.backends.hmac.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('logout/', views.logout, {"next_page":'/'})
 ]
