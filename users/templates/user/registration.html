@@ -17,10 +17,16 @@
                 <div class="panel-body">
                     <form action="/accounts/django_register/" method="post">
                         {% csrf_token %}
+                        <legend class="border-bottom mb-4">Join Today</legend>
                         {% bootstrap_form form%}
                         <input type="submit" class ="btn btn-primary btn-sm" value= "Sign Up"> 
                         <input type="hidden" name="next" value="{{next}}">   
                     </form>
+                    <div class = "border-top pt-3">
+                        <small class="text-muted">
+                            Already Have An Account?<a class="ml-2" href="#">Sign In</a>
+                        </small>
+                    </div>
                 </div>
             </diV>
         </div>
