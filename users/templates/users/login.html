@@ -1,5 +1,5 @@
-{%extends "registration/base.html"%}
-{% load bootstrap3 %}
+{%extends "users/base.html"%}
+{% load bootstrap4 %}
 {% block content %}
 <div class="container">
   <div class="row">
@@ -18,7 +18,8 @@
 
           <form  action="/accounts/login/" method="post">
             {% csrf_token %}
-            {% bootstrap_form form%}
+            <legend class="border-bottom mb-4">Log In</legend>
+            {%  form|crispy%}
 
             <div class="form-group">
               <input type="submit" class="btn btn-primary btn-sm" value="Login">
@@ -27,7 +28,11 @@
             <input type="hidden" name="next" value="{{next}}">
 
           </form>
-
+          <div class = "border-top pt-3">
+            <small class="text-muted">
+                Need An Account?<a class="ml-2" href="{% url 'register' %}">Sign Up</a>
+            </small>
+        </div>
         </div>
 
       </div>
