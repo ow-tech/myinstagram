@@ -6,14 +6,14 @@ from .forms import NewPostForm
 
 
 
-
+@login_required(login_url='')
 def main(request):
     context = {
         'posts': Post.objects.all()
     }
     return render(request, 'instagram/main.html', context)
 
-@login_required(login_url='/accounts/login')
+@login_required(login_url='/auth/login')
 def new_post(request):
     current_user = request.current_user
     if request.method == 'POST':
