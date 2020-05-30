@@ -33,8 +33,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'instagram',
     'users',
+    'instagram',
     'bootstrap4',
     'django.contrib.admin',
     'django.contrib.auth',
