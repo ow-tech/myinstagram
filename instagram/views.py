@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Post
+from .models import Post, Profile
 from django.contrib.auth.decorators import login_required
-from .forms import NewPostForm, UserUpdateForm, ProfileUpdateForm
+from .forms import NewPostForm, ProfileUpdateForm
 
 
 
@@ -37,11 +37,21 @@ def single_post(request):
 
 
 def profile(request):
-    user_upgit addate_form = UserUpdateForm()
-    profile_update_form = ProfileUpdateForm()
+    if request.method =='POST':
+        # user_update_form = UserUpdateForm(request.POST,instance=request.user)
+        profile_update_form = ProfileUpdateForm(request.POST, request.FILES)
+
+        if profile_update_form.is_valid:
+            # user_update_form.is_valid()
+            # user_update_form.save()
+            profile_update_form.save()
+            return redirect('profile')
+    else:
+        # user_update_form = UserUpdateForm(instance=request.user)
+        profile_update_form = ProfileUpdateForm()
 
     context = {
-        'user_update_form': user_update_form,
+        # 'user_update_form': user_update_form,
         'profile_update_form': profile_update_form
     }
     return render(request, 'users/profile.html', context)
