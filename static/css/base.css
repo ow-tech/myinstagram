@@ -8,13 +8,29 @@ body{
 #navbar{
     height:60px;
     background-color: whitesmoke;
-    border-bottom: 3px;
+    border-bottom: 3px solid #111;
     border-color: thistle;
-    border-bottom: thistle;
+
 }
 .account-image{
     height: 125px;
     width: 125px;
     margin-right: 20px;
     margin-bottom: 16px;
+}
+
+.icons a{
+    color:#111;
+}
+.instalogo{
+    margin-left:200px;
+    font-size: 25px;
+}
+.vl{
+    border-left: 1.5px solid black;
+    height: 25px;
+    padding-left: 5px;
+}
+.logout{
+    margin-right: 200px;
 }
