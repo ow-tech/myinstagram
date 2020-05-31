@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Post
 from django.contrib.auth.decorators import login_required
-from .forms import NewPostForm
+from .forms import NewPostForm, UserUpdateForm, ProfileUpdateForm
 
 
 
@@ -34,3 +34,14 @@ def single_post(request):
 
     }
     return render(request, 'instagram/single_post.html', context)
+
+
+def profile(request):
+    user_upgit addate_form = UserUpdateForm()
+    profile_update_form = ProfileUpdateForm()
+
+    context = {
+        'user_update_form': user_update_form,
+        'profile_update_form': profile_update_form
+    }
+    return render(request, 'users/profile.html', context)
