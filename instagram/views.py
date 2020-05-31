@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Post, Profile
+from .models import Image, Profile
 from django.contrib.auth.decorators import login_required
 from .forms import NewPostForm, ProfileUpdateForm
 
@@ -9,13 +9,13 @@ from .forms import NewPostForm, ProfileUpdateForm
 @login_required(login_url='')
 def main(request):
     context = {
-        'posts': Post.objects.all()
+        'posts': Image.objects.all()
     }
     return render(request, 'instagram/main.html', context)
 
 @login_required(login_url='/auth/login')
 def new_post(request):
-    current_user = request.current_user
+    current_user = request.user
     if request.method == 'POST':
         form = NewPostForm(request.POST, request.FILES)
         if form.is_valid():
@@ -35,7 +35,7 @@ def single_post(request):
     }
     return render(request, 'instagram/single_post.html', context)
 
-
+login_required(login_url='/accounts/login')
 def profile(request):
     if request.method =='POST':
         # user_update_form = UserUpdateForm(request.POST,instance=request.user)
