@@ -36,3 +36,10 @@ body{
     margin-top: 20px;
     margin-left: 70px;
 }
+#post{
+    margin-top: 100px;
+}
+.fas{
+    height: 10px;
+    width: auto;
+}

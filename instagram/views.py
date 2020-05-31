@@ -9,7 +9,7 @@ from .forms import NewPostForm, ProfileUpdateForm
 @login_required(login_url='')
 def main(request):
     context = {
-        'posts': Image.objects.all()
+        'posts': Image.objects.all().order_by('-date_posted')
     }
     return render(request, 'instagram/main.html', context)
 
