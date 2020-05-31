@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import Image, Profile
 from django.contrib.auth.decorators import login_required
@@ -28,12 +28,10 @@ def new_post(request):
     return render(request,'new_post.html',{"form":form})
 
 @login_required(login_url='/accounts/login')
-def single_post(request):
+def single_post(request, image_id):
+    images = get_object_or_404(Image, pk=image_id)
 
-    context ={
-
-    }
-    return render(request, 'instagram/single_post.html', context)
+    return render(request, 'instagram/single_post.html', {"images":images})
 
 login_required(login_url='/accounts/login')
 def profile(request):

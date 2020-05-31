@@ -8,9 +8,7 @@ body{
 #navbar{
     height:60px;
     background-color: whitesmoke;
-    border-bottom: 3px solid #111;
-    border-color: thistle;
-
+    border-bottom: 1px solid black;
 }
 .account-image{
     height: 125px;
@@ -33,4 +31,8 @@ body{
 }
 .logout{
     margin-right: 200px;
+}
+.post{
+    margin-top: 20px;
+    margin-left: 70px;
 }

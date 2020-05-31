@@ -17,6 +17,12 @@ class Image(models.Model):
         self.save()
 
 
+    @classmethod
+    def get_single_image_by_id(cls, id):
+        image = cls.objects.filter(id).all()
+        return image
+
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     image = models.ImageField(default='default.jpg', upload_to='profile_images')
