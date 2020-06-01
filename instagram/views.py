@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import Image, Profile
+from .models import Image
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .forms import NewPostForm, ProfileUpdateForm
+from .forms import NewPostForm
 
 
 
@@ -32,10 +33,10 @@ def update_post(request, pk):
     form = NewPostForm(instance=post)
 
     if request.method == 'POST':
-        form = NewPostForm(request.POST, instance=post)
+        form = NewPostForm(request.POST, instance=request.post)
         if form.is_valid():
             form.save() 
-            return redirect('single_image') 
+            return redirect('main_page') 
     else:
         form = NewPostForm()
     return render(request, 'new_post.html', {'form':form,'post':post})
@@ -51,30 +52,23 @@ def delete_post(request, pk):
         "post":post
     }
     return render(request, 'instagram/delete_post.html', context)
+
+
 @login_required(login_url='/accounts/login')
 def single_post(request, image_id):
     images = get_object_or_404(Image, pk=image_id)
-
     return render(request, 'instagram/single_post.html', {"images":images})
 
 login_required(login_url='/accounts/login')
-def profile(request):
-    if request.method =='POST':
-        # user_update_form = UserUpdateForm(request.POST,instance=request.user)
-        profile_update_form = ProfileUpdateForm(request.POST, request.FILES)
 
-        if profile_update_form.is_valid:
-            # user_update_form.is_valid()
-            # user_update_form.save()
-            profile_update_form.save()
-            return redirect('profile')
+def search_results(request):
+    if 'image' in request.GET and request.GET['image']:
+        search_term = request.GET.get("image")
+        searched_images = Image.search_by_author(search_term)
+        message = f"{ search_term }"
+        return render(request, 'instagram/search.html',{"message":message,"images": searched_images})
+
     else:
-        # user_update_form = UserUpdateForm(instance=request.user)
-        profile_update_form = ProfileUpdateForm()
-
-    context = {
-        # 'user_update_form': user_update_form,
-        'profile_update_form': profile_update_form
-    }
-    return render(request, 'users/profile.html', context)
+        message = "You haven't searched for any term"
+        return render(request, 'instagram/search.html',{"message":message})
 

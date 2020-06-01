@@ -1,11 +1,14 @@
 {% extends "users/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-<div class="conatiner-fluid">
+<div class="conatiner-fluid login">
     <h1>{{ user.username }}</h1>
-        <img class="rounded-circle account-image"  src="{{ user.profile.image.url }}">
+    {%for profile in profiles %}
+        <img class="rounded-circle account-image"  src="{{profile.image.url }}">
         <p>{{ user.profile.bio }}</p>
-
+    {% endfor %}
+    <img class="rounded-circle account-image"  src="{{user.profile.image.url }}">
+    <p>{{user.profile.bio }}</p>
 
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}

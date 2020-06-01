@@ -26,16 +26,15 @@ class Image(models.Model):
         image = cls.objects.filter(id).all()
         return image
 
+    @classmethod
+    def search_by_author(cls, search_term):
+        users = cls.objects.filter(author__username__icontains=search_term)
+        return users
 
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
-    image = models.ImageField(default='default.jpg', upload_to='profile_images')
-    bio = models.TextField()
-
-
-    def __str__(self):
-        return '{} {}'.format(self.user, self.bio)
+    
 
 
-    def save_profile(self):
-        self.save()
+
+
+
+

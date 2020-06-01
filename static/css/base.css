@@ -39,9 +39,17 @@ body{
 #post{
     margin-top: 100px;
 }
-.form, .login{
+.form, .login, .singleImage, .search{
     margin-top: 100px;
 }
 .pa{
     margin-top: 200px;
+}
+.singleImage{
+    margin-left: 24%;
+    
+}
+.singleImage img{
+    height: 550px;
+    width: auto;
 }

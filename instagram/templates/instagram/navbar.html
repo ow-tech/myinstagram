@@ -15,8 +15,13 @@
             <a class="navbar-brand" href="{% url 'main_page' %}">Instagram</a>
           </div>
           <div class="searchbar">
-            <input type='text' placeholder="Search">
-            <a class="search" href="/"><i class="fas fa-search"></i></a>
+            <form class="navbar-form" role="search" action="{% url 'search_results' %}">
+
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search Users" name="image">
+                <a type="submit" href="/"><i class="fas fa-search"></i></a>
+              </div>
+            </form>
           </div>
           <div class="navbar-nav icons">
             {% if user.is_authenticated %}
