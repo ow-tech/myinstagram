@@ -1,4 +1,7 @@
 {% extends 'instagram/base.html' %}
 {% block content %}
-<h3>ygufyu</h3>
-{% endblock%}
+<div class="update">
+    <a class="btn btn-sm btn-info" href="{% url 'updatepost' post.id %}">Update</a>
+    <a class="btn btn-sm btn-danger" href="">Delete</a>
+</div>
+{% endblock %}

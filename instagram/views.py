@@ -27,6 +27,20 @@ def new_post(request):
         form = NewPostForm()
     return render(request,'new_post.html',{"form":form})
 
+def update_post(request, pk):
+    post = Image.objects.get(id=pk)
+    form = NewPostForm(instance=post)
+
+    if request.method == 'POST':
+        form = NewPostForm(request.POST, instance=post)
+        if form.is_valid():
+            form.save() 
+            return redirect('single_image') 
+    else:
+        form = NewPostForm()
+    return render(request, 'new_post.html', {'form':form,'post':post})
+
+
 @login_required(login_url='/accounts/login')
 def single_post(request, image_id):
     images = get_object_or_404(Image, pk=image_id)
@@ -53,3 +67,4 @@ def profile(request):
         'profile_update_form': profile_update_form
     }
     return render(request, 'users/profile.html', context)
+
