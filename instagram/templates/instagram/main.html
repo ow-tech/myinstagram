@@ -12,7 +12,7 @@
     <div class="card post" style="width: 40rem;">
             <div class="update">
                 <a class="btn btn-sm btn-info" href="{% url 'updatepost' post.id %}">Update</a>
-                <a class="btn btn-sm btn-danger" href="">Delete</a>
+                <a class="btn btn-sm btn-danger" href="{% url 'deletepost' post.id %}">Delete</a>
             </div>
         <h5 class="card-title">{{ post.author }}</h5>
         <a href="{% url 'single_image' post.id %}"><img class="card-img-top" src= "{{ post.image.url}}" alt="image"></a>

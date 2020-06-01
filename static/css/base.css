@@ -36,9 +36,12 @@ body{
     margin-top: 20px;
     margin-left: 70px;
 }
-/* #post{
+#post{
     margin-top: 100px;
-} */
-.update, .form{
+}
+.form, .login{
     margin-top: 100px;
+}
+.pa{
+    margin-top: 200px;
 }

@@ -40,7 +40,17 @@ def update_post(request, pk):
         form = NewPostForm()
     return render(request, 'new_post.html', {'form':form,'post':post})
 
+def delete_post(request, pk):
+    post = Image.objects.get(id=pk)
+    current_user = request.user
 
+    if current_user == post.author and request.method == 'POST':
+        post.delete()
+        return redirect('main_page')
+    context = {
+        "post":post
+    }
+    return render(request, 'instagram/delete_post.html', context)
 @login_required(login_url='/accounts/login')
 def single_post(request, image_id):
     images = get_object_or_404(Image, pk=image_id)

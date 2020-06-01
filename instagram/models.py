@@ -11,10 +11,14 @@ class Image(models.Model):
     date_posted = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return  '{} {}'.format(self.author, self.caption) 
+        return  '{}'.format(self.image_name)
 
     def save_post(self):
         self.save()
+    @classmethod
+    def delete_post(cls, id):
+        image = cls.objects.filter(id).all()
+        image.delete() 
 
 
     @classmethod

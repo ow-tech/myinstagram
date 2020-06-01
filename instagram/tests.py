@@ -6,7 +6,7 @@ from .models import Image
 class PostTestClass(TestCase):
     #Set up method
     def setUp(self):
-        self.alex=Image(caption="We are who we are.")
+        self.alex=Image(caption="We are who we are.",image_name='self expression')
 
     #Testing instance
 
@@ -16,8 +16,14 @@ class PostTestClass(TestCase):
     #Testing Save method
     def test_save_method(self):
         self.alex.save_image()
-        image= Image.objects.all()
+        image = Image.objects.all()
         self.assertTrue(len(image) > 0)
+
+    def test_delete_post(self):
+        self.image = Image(capation="We are who we are" image_name='self expression')
+        self.image.delete_post()
+        after = Image.object.all()
+        self.assertTrue(len(after)<1)
 
 
 class ProfileTestCase(TestCase):
@@ -30,3 +36,4 @@ class ProfileTestCase(TestCase):
     def test_save_method(self):
         profile = Profile.objects.all()
         self.assertTrue(len(profile) > 0)
+
