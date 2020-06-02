@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import UserRegisterForm,  ProfileUpdateForm
 from .models import Profile
+from instagram.models import Image
 
 def register(request):
     if request.method == 'POST':
@@ -16,6 +17,7 @@ def register(request):
     return render(request, 'users/registration.html', {"form":form})
 
 def profile(request):
+    images = Image.objects.filter(author=request.user).all()
     profile = Profile.objects.get_or_create(user=request.user)
     if request.method =='POST':
         profile_update_form = ProfileUpdateForm(request.POST or None, request.FILES, instance=request.user.profile)
@@ -27,6 +29,7 @@ def profile(request):
 
     context = {
         'profile_update_form': profile_update_form,
+        'images':images
     }
     return render(request, 'users/profile.html', context)
 
