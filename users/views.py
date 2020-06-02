@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
-# from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .forms import UserRegisterForm,  ProfileUpdateForm
+from .models import Profile
+
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
@@ -13,25 +14,19 @@ def register(request):
     else:
         form = UserRegisterForm()
     return render(request, 'users/registration.html', {"form":form})
-def profile(request):
-    # profiles = get_object_or_404(Profile, pk=profile_user)
-    if request.method =='POST':
-        # user_update_form = UserUpdateForm(request.POST,instance=request.user)
-        profile_update_form = ProfileUpdateForm(request.POST, request.FILES)
 
-        if profile_update_form.is_valid:
-            # user_update_form.is_valid()
-            # user_update_form.save()
+def profile(request):
+    profile = Profile.objects.get_or_create(user=request.user)
+    if request.method =='POST':
+        profile_update_form = ProfileUpdateForm(request.POST or None, request.FILES, instance=request.user.profile)
+        if profile_update_form.is_valid():
             profile_update_form.save()
             return redirect('profile')
     else:
-        # user_update_form = UserUpdateForm(instance=request.user)
         profile_update_form = ProfileUpdateForm()
 
     context = {
-        # 'user_update_form': user_update_form,
         'profile_update_form': profile_update_form,
-        # 'profiles':profiles
     }
-    return render(request, 'instagram/profile.html', context)
+    return render(request, 'users/profile.html', context)
 

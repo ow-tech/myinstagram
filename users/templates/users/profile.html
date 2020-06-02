@@ -3,17 +3,12 @@
 {% block content %}
 <div class="conatiner-fluid login">
     <h1>{{ user.username }}</h1>
-    {%for profile in profiles %}
-        <img class="rounded-circle account-image"  src="{{profile.image.url }}">
-        <p>{{ user.profile.bio }}</p>
-    {% endfor %}
-    <img class="rounded-circle account-image"  src="{{user.profile.image.url }}">
+    <img class="rounded-circle account-image"  src="{{ user.profile.image.url }}">
     <p>{{user.profile.bio }}</p>
 
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <legend class="border-bottom mb-4">Profile Info</legend>
-        <!-- {{ user_update_form|crispy }} -->
         {{ profile_update_form|crispy }}
         <div class="form-group">
             <input type="submit" value="Update Profile" class="btn btn-primary btn-sm">
