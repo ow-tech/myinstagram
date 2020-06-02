@@ -8,6 +8,7 @@ class Image(models.Model):
     image = models.ImageField(upload_to="images/", null=False, default='SOME STRING')
     image_name = models.CharField(max_length=100)
     caption = models.TextField()
+    # likes = models.ManyToManyField(User, default = None, blank=True)
     date_posted = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -31,6 +32,10 @@ class Image(models.Model):
         users = cls.objects.filter(author__username__icontains=search_term)
         return users
 
+    @property
+    def num_likes(self):
+        return self.likes.all().count()
+
 class Comments(models.Model):
     image = models.ForeignKey(Image, related_name='comments', on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -47,7 +52,10 @@ class Comments(models.Model):
 
 
 
-    
+# class Like(models.Model):
+#     user = models.ForeignKey(User, on_delete = models.CASCADE)
+#     post = models.ForeignKey(Image, on_delete=models.CASCADE)
+#     value = models.CharField(choices=, default='Like', max_length=10)
 
 
 

@@ -22,7 +22,7 @@
         <div class="card-body">
             <div class='engagement'>
                 <a href="#" class="btn btn-primary"><i class="far fa-heart"></i></a>
-                <a href="#" class="btn btn-primary"><i class="far fa-comment"></i></a>
+                <a href="{% url 'add_comment' post.id %}"><i class="far fa-comment"></i></a>
                 <a href="#" class="btn btn-primary"><i class="fas fa-external-link-alt"></i></a>
             </div>
             <div>
@@ -32,7 +32,6 @@
 
             <div class="commentsection">
                 <p>Total Comments: {{ post.comments.count }}</p>
-                <a href="{% url 'add_comment' post.id %}">Leave A Comment</a>
             </div>
 
             <div class='timepass'>

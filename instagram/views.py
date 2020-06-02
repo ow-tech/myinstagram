@@ -58,7 +58,7 @@ def delete_post(request, pk):
 @login_required(login_url='/accounts/login')
 def single_post(request, pk):
     images = get_object_or_404(Image, id=pk)
-    comments = Comments.objects.all()
+    comments = Comments.objects.filter(image__id = pk)
     context = {
         "images":images,
         "comments": comments
