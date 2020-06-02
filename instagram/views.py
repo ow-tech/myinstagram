@@ -1,16 +1,17 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import Image
+from .models import Image, Comments
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .forms import NewPostForm
+from .forms import NewPostForm, CommentForm
 
 
 
 @login_required(login_url='')
 def main(request):
     context = {
-        'posts': Image.objects.all().order_by('-date_posted')
+        'posts': Image.objects.all().order_by('-date_posted'),
+        'comments': Comments.objects.all()
     }
     return render(request, 'instagram/main.html', context)
 
@@ -55,9 +56,14 @@ def delete_post(request, pk):
 
 
 @login_required(login_url='/accounts/login')
-def single_post(request, image_id):
-    images = get_object_or_404(Image, pk=image_id)
-    return render(request, 'instagram/single_post.html', {"images":images})
+def single_post(request, pk):
+    images = get_object_or_404(Image, id=pk)
+    comments = Comments.objects.all()
+    context = {
+        "images":images,
+        "comments": comments
+    }
+    return render(request, 'instagram/single_post.html', context)
 
 login_required(login_url='/accounts/login')
 
@@ -71,4 +77,24 @@ def search_results(request):
     else:
         message = "You haven't searched for any term"
         return render(request, 'instagram/search.html',{"message":message})
+
+def comments(request, pk):
+    current_user = request.user
+    image = get_object_or_404(Image, id=pk)
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit = False)
+            comment.user = current_user
+            comment.image = image
+            comment.save()
+            return redirect('main_page')
+    else:
+        form = CommentForm()
+    return render(request,'instagram/add_comment.html',{"form":form})
+        
+        
+
+
+    comment = get_object_or_404()
 

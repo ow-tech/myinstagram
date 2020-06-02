@@ -16,6 +16,7 @@
         </div>
         <div>
             <h5 class="card-title">{{ post.author }}</h5>
+            <hr>
             <a href="{% url 'single_image' post.id %}"><img class="card-img-top" src= "{{ post.image.url}}" alt="image"></a>
         </div> 
         <div class="card-body">
@@ -25,8 +26,15 @@
                 <a href="#" class="btn btn-primary"><i class="fas fa-external-link-alt"></i></a>
             </div>
             <div>
-                <a href="{% url 'profile' %}">{{ post.author}}</a> <span><p class="card-text">{{post.caption}}</p></span>
+                <a href="{% url 'profile' %}">Posted by: {{ post.author}}</a> <span><p class="card-text">Caption: {{post.caption}}</p></span>
             </div>
+            <hr>
+
+            <div class="commentsection">
+                <p>Total Comments: {{ post.comments.count }}</p>
+                <a href="{% url 'add_comment' post.id %}">Leave A Comment</a>
+            </div>
+
             <div class='timepass'>
                 {{post.date_posted |timesince }} ago
             </div>

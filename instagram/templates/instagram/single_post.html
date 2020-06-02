@@ -1,8 +1,20 @@
 {% extends 'instagram/base.html' %}
 {% block content %}
-<div class="singleImage">
-    <h4>Name: {{images.image_name}} </h4>
-    <h6>Caption: {{ images.caption }}</h6>
-    <img class="card-img-top " src= "{{ images.image.url}}" alt="image">
+<div class="row">
+    <div class="col-md-8">
+        <div class="singleImage">
+            <h4>Name: {{images.image_name}} </h4>
+            <h6>Caption: {{ images.caption }}</h6>
+            <img class="card-img-top " src= "{{ images.image.url}}" alt="image">
+        </div>
+    </div>
+    <div class="col-md-4">
+        <ul>
+            <l>
+                <a href="{% url 'main_page'%}">{{images.comments.user}}</a> :{{comments.content}}
+            </l>
+        </ul>
+        <p>yes this is a sample comment</p>
+    </div>
 </div>
 {% endblock %}
