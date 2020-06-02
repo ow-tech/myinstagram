@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import Image, Comments
+from .models import *
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .forms import NewPostForm, CommentForm
+from vote.managers import  VotableManager
+
+votes = VotableManager()
 
 
 
@@ -92,9 +95,17 @@ def comments(request, pk):
     else:
         form = CommentForm()
     return render(request,'instagram/add_comment.html',{"form":form})
+
+def like_images(request, pk):
+    image = get_object_or_404(Image, id=pk)
+    user = request.user
+    # user_id = user.id
+
+    uplike = image.votes.up(user.id)
+    image.likes = image.votes.count()
+    image.save()
+    return redirect('main_page')
+
         
         
-
-
-    comment = get_object_or_404()
 

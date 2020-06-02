@@ -1,14 +1,15 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from vote.models import VoteModel
 
 # Create your models here.
-class Image(models.Model):
+class Image(VoteModel, models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
     image = models.ImageField(upload_to="images/", null=False, default='SOME STRING')
     image_name = models.CharField(max_length=100)
     caption = models.TextField()
-    # likes = models.ManyToManyField(User, default = None, blank=True)
+    likes = models.PositiveIntegerField(default=0)
     date_posted = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -24,7 +25,7 @@ class Image(models.Model):
 
     @classmethod
     def get_single_image_by_id(cls, id):
-        image = cls.objects.filter(id).all()
+        image = cls.objects.filter(pk=id)
         return image
 
     @classmethod
@@ -32,9 +33,6 @@ class Image(models.Model):
         users = cls.objects.filter(author__username__icontains=search_term)
         return users
 
-    @property
-    def num_likes(self):
-        return self.likes.all().count()
 
 class Comments(models.Model):
     image = models.ForeignKey(Image, related_name='comments', on_delete=models.CASCADE)
