@@ -30,7 +30,7 @@
 
 ## Installing 
 
-- To view the application go to [click here]()
+- To view the application go to [click here](https://myinstagram-mine.herokuapp.com/)
 - Step 1: Clone this repo :git clone ()
 
 - step 2: Open the repo using your text editor e.g atom or vscode
