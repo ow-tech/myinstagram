@@ -10,7 +10,7 @@ votes = VotableManager()
 
 
 
-@login_required(login_url='')
+@login_required(login_url='/accounts/register'')
 def main(request):
     context = {
         'posts': Image.objects.all().order_by('-date_posted'),
@@ -18,7 +18,7 @@ def main(request):
     }
     return render(request, 'instagram/main.html', context)
 
-@login_required(login_url='/auth/login')
+@login_required(login_url='/accounts/login')
 def new_post(request):
     current_user = request.user
     if request.method == 'POST':
