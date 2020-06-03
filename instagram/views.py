@@ -10,7 +10,7 @@ votes = VotableManager()
 
 
 
-@login_required(login_url='/accounts/register')
+@login_required(login_url='/accounts/login')
 def main(request):
     context = {
         'posts': Image.objects.all().order_by('-date_posted'),
