@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 from django.conf.urls.static import static
 from django.conf import settings
+import cloudinary
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -39,6 +41,7 @@ INSTALLED_APPS = [
     'instagram',
     'bootstrap4',
     'vote',
+    'cloudinary',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -151,3 +154,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = 'main_page'
+
+cloudinary.config(
+    api_key = os.environ.get("API_KEY"), 
+    api_secret = os.environ.get("API_SECRET"),
+    cloud_name = os.environ.get("CLOUD_NAME"),
+)

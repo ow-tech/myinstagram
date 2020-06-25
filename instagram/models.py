@@ -2,11 +2,12 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from vote.models import VoteModel
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 class Image(VoteModel, models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
-    image = models.ImageField(upload_to="images/", null=False, default='SOME STRING')
+    image = CloudinaryField('image', default='image')
     image_name = models.CharField(max_length=100)
     caption = models.TextField()
     likes = models.PositiveIntegerField(default=0)
@@ -35,7 +36,8 @@ class Image(VoteModel, models.Model):
 
 
 class Comments(models.Model):
-    image = models.ForeignKey(Image, related_name='comments', on_delete=models.CASCADE)
+    image = CloudinaryField('image',default='image')
+    models.ForeignKey(Image,  on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
     timestamp = models.DateTimeField(auto_now=True)
