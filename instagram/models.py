@@ -36,7 +36,7 @@ class Image(VoteModel, models.Model):
 
 
 class Comments(models.Model):
-    image = CloudinaryField('image',default='image')
+    # image = CloudinaryField('image',default='image')
     models.ForeignKey(Image,  on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
